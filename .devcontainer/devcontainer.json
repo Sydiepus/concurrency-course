@@ -1,74 +1,8 @@
 {
-    "name": "Concurrency & Distributed Systems",
-    "dockerComposeFile": "../tools/docker-compose.yml",
-    "service": "dev",
-    "workspaceFolder": "/workspace",
-    "shutdownAction": "stopCompose",
-    "forwardPorts": [
-        8080,
-        9092,
-        50051
-    ],
-    "portsAttributes": {
-        "8080": {
-            "label": "Kafka UI",
-            "onAutoForward": "notify"
-        },
-        "9092": {
-            "label": "Kafka Broker"
-        },
-        "50051": {
-            "label": "gRPC"
-        }
-    },
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "terminal.integrated.defaultProfile.linux": "bash",
-                "java.jdt.ls.java.home": "/usr/lib/jvm/java-21-openjdk-amd64",
-                "java.configuration.runtimes": [
-                    {
-                        "name": "JavaSE-21",
-                        "path": "/usr/lib/jvm/java-21-openjdk-amd64",
-                        "default": true
-                    }
-                ],
-                "python.defaultInterpreterPath": "/usr/bin/python3",
-                "files.autoSave": "afterDelay",
-                "editor.formatOnSave": true,
-                "editor.rulers": [
-                    80,
-                    120
-                ],
-                "java.compile.nullAnalysis.mode": "automatic",
-                "java.debug.settings.console": "integratedTerminal",
-                "java.debug.settings.showHex": false,
-                "java.debug.settings.enableRunDebugCodeLens": true
-            },
-            "extensions": [
-                "ms-azuretools.vscode-docker",
-                "redhat.java",
-                "vscjava.vscode-java-debug",
-                "vscjava.vscode-java-test",
-                "vscjava.vscode-gradle",
-                "ms-python.python",
-                "ms-python.vscode-pylance",
-                "eamodio.gitlens",
-                "mutantdino.resourcemonitor"
-            ]
-        }
-    },
-    "postCreateCommand": "bash /workspace/scripts/setup.sh",
-    "postStartCommand": "echo '✅ Environment ready. Start Kafka with: ./scripts/kafka-quickstart.sh start'",
-    "remoteUser": "vscode",
-    "mounts": [
-        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
-        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
-        "source=gradle-cache,target=/home/vscode/.gradle,type=volume"
-    ],
-    "containerEnv": {
-        "JAVA_HOME": "/usr/lib/jvm/java-21-openjdk-amd64",
-        "GRADLE_USER_HOME": "/home/vscode/.gradle",
-        "PATH": "${containerEnv:PATH}:/home/vscode/.local/bin"
-    }
+  "name": "Concurrency Course  Minimal",
+  "build": { "dockerfile": "Dockerfile" },
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "remoteUser": "vscode",
+  "postCreateCommand": "bash /workspace/scripts/setup.sh"
 }
