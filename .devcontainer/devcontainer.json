@@ -1,8 +1,8 @@
 {
-  "name": "Concurrency Course  Minimal",
-  "build": { "dockerfile": "Dockerfile" },
+  "name": "Concurrency Course – Dev (Compose)",
+  "dockerComposeFile": "../tools/docker-compose.yml",
+  "service": "dev",
   "workspaceFolder": "/workspace",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "remoteUser": "vscode",
   "postCreateCommand": "bash /workspace/scripts/setup.sh"
 }
