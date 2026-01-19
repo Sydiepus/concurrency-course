@@ -229,12 +229,19 @@ If stopped:
 📁 Repository Structure
 concurrency-course/
 │
+
 ├─ .devcontainer/
+
 ├─ tools/
+
 ├─ scripts/
+
 ├─ labs/
+
 │   └─ java-concurrency/
+
 │       └─ week-01-threads/
+
 └─ README.md
 
 ✅ Final Check (Before Every Lab)
