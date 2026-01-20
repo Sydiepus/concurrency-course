@@ -1,15 +1,32 @@
 services:
   dev:
-    user: vscode
+    build:
+      context: ../.devcontainer
+      dockerfile: Dockerfile
+    container_name: concurrency-dev
+    user: "1000:1000"
+
     environment:
+      HOME: /home/vscode
       GRADLE_USER_HOME: /home/vscode/.gradle
+      GRADLE_OPTS: "-Dorg.gradle.daemon=true -Dorg.gradle.jvmargs=-Xmx1g"
+      JAVA_TOOL_OPTIONS: "-Duser.home=/home/vscode"
+
     volumes:
       - ../:/workspace:cached
       - gradle-cache:/home/vscode/.gradle
 
+    working_dir: /workspace
+    tty: true
+    stdin_open: true
+    command: sleep infinity
+
+    # optional but helpful
+    healthcheck:
+      test: ["CMD-SHELL", "java -version >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 volumes:
   gradle-cache:
-
-
-
-

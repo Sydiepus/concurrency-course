@@ -1,0 +1,15 @@
+plugins {
+    id 'application'
+}
+
+repositories { mavenCentral() }
+
+application {
+    mainClass = 'course.Main'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
