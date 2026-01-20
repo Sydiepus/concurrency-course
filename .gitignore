@@ -12,3 +12,6 @@ Thumbs.db
 *.pyc
 
 *.log
+
+# Prevent huge Gradle distributions in git
+tools/gradle/*.zip
