@@ -1,0 +1,10 @@
+My machines has 12 cores.
+
+OptimaThreads = Cores x (1 + Wait/Compute)
+
+Recommended pool size for:
+- (90/10): 120
+- (50/50): 24
+- (10/90): 13
+
+
