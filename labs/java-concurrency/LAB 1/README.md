@@ -47,17 +47,28 @@ For CPU-bound workloads, the tuning formula predicts an optimal pool size of 13 
 
 ## Lecture 4
 
+| Load | p50 (ms) | p95 (ms) | Throughput (req/s)|
+|---|---|---|---|
+|Light (10)|102|106|94|
+|Medium (50)|224|313|192.54|
+|Heavy (200)|884|1031|200.27|
+
+- Files:
+   - `labs/java-concurrency/LAB 1/light_10.csv`
+   - `labs/java-concurrency/LAB 1/medium_50.csv`
+   - `labs/java-concurrency/LAB 1/heavy_200.csv`
+
 1. **Why did latency drop with threads?**
-   - Multi-threading allows concurrent request processing instead of sequential queuing. Requests no longer wait for previous requests to complete, reducing wait time and overall latency.
+   - Threads enable overlap, processing requests concurrently rather than serially in a queue.
 
 2. **Why did p95 increase under heavy load?**
-   - Comparing pool=10 (p95: 380ms) vs pool=50 (p95: 407ms), excessive threads beyond optimal capacity cause context switching overhead which increase latency.
+   - Heavy load (200 clients) causes queue buildup and scheduling overhead, increasing p95 from 106ms to 1031ms.
 
 3. **Why didn't throughput grow infinitely?**
-   - Throughput plateaus around 154-156 req/s regardless of pool size due to Amdahl's Law: the system is limited by fixed core count.
+   - CPU saturation at ~200 req/s: throughput plateaus (192.54→200.27) as cores reach full utilization.
 
 4. **Was the system I/O-bound or CPU-bound?**
-   - The CPU-bound comparison showed optimal performance at pool=13 (close to core count), indicating CPU-bound behavior. I/O-bound workloads would benefit from much larger pools.
+   - CPU-bound. Optimal pool size (13) matched core count; I/O-bound workloads scale with larger pools.
 
 ## Lecture 5
 

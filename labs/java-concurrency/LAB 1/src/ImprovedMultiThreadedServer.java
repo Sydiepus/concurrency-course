@@ -14,7 +14,8 @@ public class ImprovedMultiThreadedServer {
     // Bounded queue prevents memory explosion under overload
     private static final int QUEUE_CAPACITY = 100;
 
-    // If a request waits too long in the queue, we drop it (basic admission control)
+    // If a request waits too long in the queue, we drop it (basic admission
+    // control)
     private static final long QUEUE_TIMEOUT_MS = 1000;
 
     // Protect worker threads from slow clients hanging on reads
@@ -26,7 +27,8 @@ public class ImprovedMultiThreadedServer {
 
         // Optional: allow port via args
         int port = 8080;
-        if (args.length >= 1) port = Integer.parseInt(args[0]);
+        if (args.length >= 1)
+            port = Integer.parseInt(args[0]);
 
         // ---- Bounded work queue (core overload protection) ----
         BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(QUEUE_CAPACITY);
@@ -35,7 +37,8 @@ public class ImprovedMultiThreadedServer {
         RejectedExecutionHandler rejectionHandler = (r, executor) -> {
             rejectedCount.incrementAndGet();
             // Backpressure strategy:
-            // CallerRunsPolicy runs task on the accept thread, slowing down accept() => "push back" on load.
+            // CallerRunsPolicy runs task on the accept thread, slowing down accept() =>
+            // "push back" on load.
             if (!executor.isShutdown()) {
                 r.run();
             }
@@ -45,8 +48,7 @@ public class ImprovedMultiThreadedServer {
                 POOL_SIZE, POOL_SIZE,
                 30L, TimeUnit.SECONDS,
                 queue,
-                rejectionHandler
-        );
+                rejectionHandler);
 
         // Prestart threads so first burst doesn't pay thread-creation latency
         pool.prestartAllCoreThreads();
@@ -64,7 +66,8 @@ public class ImprovedMultiThreadedServer {
             System.out.println("\nShutting down gracefully...");
             try {
                 serverSocket.close(); // IMPORTANT: unblocks accept()
-            } catch (IOException ignored) {}
+            } catch (IOException ignored) {
+            }
 
             pool.shutdown();
             try {
@@ -132,13 +135,18 @@ public class ImprovedMultiThreadedServer {
 
         try {
             // Simulate I/O wait (DB, network)
-            try { Thread.sleep(100); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
 
             PrintWriter out = new PrintWriter(client.getOutputStream(), true);
             out.print("HTTP/1.1 200 OK\r\n");
             out.print("Connection: close\r\n");
             out.print("\r\n");
             out.print("OK\n");
+            out.flush();
 
         } finally {
             long latencyMs = (System.nanoTime() - start) / 1_000_000;
