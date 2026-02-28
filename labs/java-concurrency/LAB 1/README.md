@@ -6,6 +6,10 @@
 ## Lecture 2
 - Files:
     - `labs/java-concurrency/LAB 1/explanation_paragraph.txt`
+    - `labs/java-concurrency/LAB 1/pool5.csv`
+    - `labs/java-concurrency/LAB 1/pool10.csv`
+    - `labs/java-concurrency/LAB 1/pool50.csv`
+    - `labs/java-concurrency/LAB 1/cpu_pool5.csv`
     - `labs/java-concurrency/LAB 1/cpu_pool10.csv`
     - `labs/java-concurrency/LAB 1/cpu_pool13.csv`
     - `labs/java-concurrency/LAB 1/cpu_pool24.csv`
@@ -16,14 +20,14 @@
 
 | Pool Size | p50 Latency (ms) | p95 Latency (ms) | Throughput (req/s) |
 |-----------|------------------|------------------|--------------------|
-| 120       | 316              | 410              | 154.44             |
-| 24        | 326              | 397              | 146.75             |
-| 13        | 333              | 387              | 147.50             |
-
+|5          |1027              |1061              |48.31               |
+|10         |516               |524               |96.15               |
+|50         |106               |113               |461.16              |
 ### CPU-Bound Comparison
 
 | Pool Size | p50 Latency (ms) | p95 Latency (ms) | Throughput (req/s) |
 |-----------|------------------|------------------|--------------------|
+|5          |358               |423               |135.14              |
 | 10        | 306              | 380              | 156.09             |
 | 50        | 315              | 407              | 153.91             |
 
@@ -47,11 +51,11 @@ For CPU-bound workloads, the tuning formula predicts an optimal pool size of 13 
 
 ## Lecture 4
 
-| Load | p50 (ms) | p95 (ms) | Throughput (req/s)|
-|---|---|---|---|
-|Light (10)|102|106|94|
-|Medium (50)|224|313|192.54|
-|Heavy (200)|884|1031|200.27|
+| Load      | p50 (ms) | p95 (ms) | Throughput (req/s)|
+|-----------|----------|----------|-------------------|
+|Light (10) |102       |106       |94                 |
+|Medium (50)|224       |313       |192.54             |
+|Heavy (200)|884       |1031      |200.27             |
 
 - Files:
    - `labs/java-concurrency/LAB 1/light_10.csv`
